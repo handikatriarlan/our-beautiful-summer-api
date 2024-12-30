@@ -30,19 +30,46 @@ export class MemoriesController {
     if (!photo) {
       throw new BadRequestException('Photo is required');
     }
-    return this.memoriesService.create(createMemoryDto, photo);
+
+    try {
+      const createdMemory = await this.memoriesService.create(
+        createMemoryDto,
+        photo,
+      );
+      return {
+        status: 'success',
+        message: 'Memory created successfully',
+        data: createdMemory,
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all memories' })
   async getAllMemories() {
-    return this.memoriesService.findAll();
+    const memories = await this.memoriesService.findAll();
+    return {
+      status: 'success',
+      message: 'Memories retrieved successfully',
+      data: memories,
+    };
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a memory by id' })
   async getMemory(@Param('id') id: string) {
-    return this.memoriesService.findOne(id);
+    try {
+      const memory = await this.memoriesService.findOne(id);
+      return {
+        status: 'success',
+        message: 'Memory retrieved successfully',
+        data: memory,
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Put(':id')
@@ -53,12 +80,34 @@ export class MemoriesController {
     @Body() updateMemoryDto: UpdateMemoryDto,
     @UploadedFile() photo?: Express.Multer.File,
   ) {
-    return this.memoriesService.update(id, updateMemoryDto, photo);
+    try {
+      const updatedMemory = await this.memoriesService.update(
+        id,
+        updateMemoryDto,
+        photo,
+      );
+      return {
+        status: 'success',
+        message: 'Memory updated successfully',
+        data: updatedMemory,
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a memory' })
   async deleteMemory(@Param('id') id: string) {
-    return this.memoriesService.remove(id);
+    try {
+      await this.memoriesService.remove(id);
+      return {
+        status: 'success',
+        message: 'Memory deleted successfully',
+        data: null,
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }
