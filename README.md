@@ -1,99 +1,153 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Our Beautiful Summer API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS-based REST API for managing memories with photo uploads using Supabase as the backend storage solution.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Features
 
-## Description
+- Create, read, update, and delete memories
+- Photo upload and storage using Supabase Storage
+- Data persistence with Supabase Database
+- RESTful API endpoints
+- API documentation with Swagger
+- Input validation
+- Error handling
+- TypeScript support
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠 Tech Stack
 
-## Project setup
+- NestJS
+- TypeScript
+- Supabase (Database & Storage)
+- Class Validator & Class Transformer
+- Swagger/OpenAPI
 
-```bash
-$ npm install
+## 📦 Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Supabase account and project
+
+## ⚙️ Environment Setup
+
+1. Create a `.env` file in the root directory:
+
+```env
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-## Compile and run the project
+2. Create a bucket named `photos` in your Supabase project:
+   - Go to your Supabase project dashboard
+   - Navigate to Storage
+   - Create a new bucket named `photos`
+   - Set the bucket's privacy settings according to your needs
+
+## 🚀 Installation
+
+1. Clone the repository:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/handikatriarlan/our-beautiful-summer-api.git
+cd our-beautiful-summer-api
 ```
 
-## Run tests
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run start:dev
+```
+
+The API will be available at `http://localhost:3001`
+
+## 📝 API Documentation
+
+After starting the server, visit `http://localhost:3001/api` to access the Swagger documentation.
+
+### API Endpoints
+
+#### Memories
+
+- `POST /api/memories` - Create a new memory
+- `GET /api/memories` - Get all memories
+- `GET /api/memories/:id` - Get a specific memory
+- `PUT /api/memories/:id` - Update a memory
+- `DELETE /api/memories/:id` - Delete a memory
+
+### Testing with Postman/Any API Tester
+
+#### Creating a Memory
+
+```http
+POST http://localhost:3001/api/memories
+Content-Type: multipart/form-data
+
+Form Data:
+- title: "Your Memory Title"
+- description: "Your Memory Description"
+- date: "2024-01-01T00:00:00Z"
+- photo: [Select File]
+```
+
+#### Getting All Memories
+
+```http
+GET http://localhost:3001/api/memories
+```
+
+#### Getting a Specific Memory
+
+```http
+GET http://localhost:3001/api/memories/:id
+```
+
+#### Updating a Memory
+
+```http
+PUT http://localhost:3001/api/memories/:id
+Content-Type: multipart/form-data
+
+Form Data:
+- title: "Updated Title" (optional)
+- description: "Updated Description" (optional)
+- date: "2024-01-02T00:00:00Z" (optional)
+- photo: [Select File] (optional)
+```
+
+#### Deleting a Memory
+
+```http
+DELETE http://localhost:3001/api/memories/:id
+```
+
+## 🧪 Running Tests
 
 ```bash
 # unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
+npm run test
 
 # test coverage
-$ npm run test:cov
+npm run test:coverage
 ```
 
-## Deployment
+## 📜 Available Scripts
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- `npm run build` - Build the application
+- `npm run format` - Format code using Prettier
+- `npm run start` - Start the application
+- `npm run start:dev` - Start in development mode with watch
+- `npm run start:debug` - Start in debug mode
+- `npm run start:prod` - Start in production mode
+- `npm run lint` - Lint the code
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Generate test coverage report
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 🔒 Security
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+The API uses Supabase's Row Level Security (RLS) policies to ensure data security. Make sure to configure your RLS policies according to your security requirements.
