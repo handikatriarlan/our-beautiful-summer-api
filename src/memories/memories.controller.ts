@@ -14,6 +14,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { MemoriesService } from './memories.service';
 import { CreateMemoryDto, UpdateMemoryDto } from './dto/memory.dto';
+import 'multer';
 
 @ApiTags('memories')
 @Controller('memories')
